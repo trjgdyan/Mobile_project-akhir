@@ -11,6 +11,7 @@ class Print extends StatefulWidget {
 }
 
 class _PrintState extends State<Print> {
+  //membuat array list dengan nama data
   late List<Map<String, dynamic>> data;
 
   TextEditingController nikController = TextEditingController();

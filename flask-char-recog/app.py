@@ -125,7 +125,7 @@ def upload():
     os.remove(temp_image_path)
 
     # Mengembalikan respons dalam format JSON
-    return jsonify(response)
+    # return jsonify(response)
 
 @app.route('/get_data', methods=['GET'])
 def get_data():

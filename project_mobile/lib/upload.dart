@@ -13,16 +13,18 @@ class UploadImagess extends StatefulWidget {
 }
 
 class _UploadState extends State<UploadImagess> {
+  //menginisialisasi variabel imageFile untuk menampung file gambar yang akan diupload
   File? imageFile;
 
   // get http => null;
 
   Future getImage({required ImageSource source}) async {
+    //mendapatkan gambar dari kamera atau galeri
     final file = await ImagePicker().pickImage(
       source: source,
-      maxWidth: 640,
-      maxHeight: 480,
-      imageQuality: 70, //0 - 100
+      maxWidth: 480,
+      maxHeight: 640,
+      imageQuality: 100, //0 - 100
     );
 
     if (file?.path != null) {
@@ -41,6 +43,7 @@ class _UploadState extends State<UploadImagess> {
         return;
       }
 
+      //menyimpan link API flask
       String apiUrl = 'https://70ec-103-108-21-117.ngrok-free.app/upload';
 
       var request = http.MultipartRequest('POST', Uri.parse(apiUrl));
@@ -71,68 +74,6 @@ class _UploadState extends State<UploadImagess> {
       print('Error uploading image: $error');
     }
   }
-
-  // @override
-
-  // Future<void> _uploadImage() async {
-  //   try {
-  //     if (imageFile == null) {
-  //       print('Please select an image first.');
-  //       return;
-  //     }
-
-  //     String apiUrl = 'https://ee3c-114-6-31-174.ngrok-free.app/upload';
-
-  //     var request = http.MultipartRequest('POST', Uri.parse(apiUrl));
-  //     request.files
-  //         .add(await http.MultipartFile.fromPath('img', imageFile!.path));
-
-  //     var response = await request.send();
-  //     if (response.statusCode == 200) {
-  //       // Request successful
-  //       print('Image uploaded successfully!');
-  //       // Handle the response, if any
-  //       // var responseData = await response.stream.toBytes();
-  //       // var result = utf8.decode(responseData);
-  //       // print(result);
-  //     } else {
-  //       // Request failed
-  //       print('Failed to upload image. Status code: ${response.statusCode}');
-  //     }
-  //   } catch (error) {
-  //     // Handle errors
-  //     print('Error uploading image: $error');
-  //   }
-  // }
-  // Future<void> _uploadImage() async {
-  //   try {
-  //     if (imageFile == null) {
-  //       print('Please select an image first.');
-  //       return;
-  //     }
-
-  //     String apiUrl = 'https://ee3c-114-6-31-174.ngrok-free.app/upload';
-
-  //     var request = http.MultipartRequest('POST', Uri.parse(apiUrl));
-  //     request.files.add(await http.MultipartFile.fromPath('img', imageFile!.path));
-
-  //     var response = await request.send();
-  //     if (response.statusCode == 200) {
-  //       // Request successful
-  //       print('Image uploaded successfully!');
-  //       // Handle the response, if any
-  //       // var responseData = await response.stream.toBytes();
-  //       // var result = utf8.decode(responseData);
-  //       // print(result);
-  //     } else {
-  //       // Request failed
-  //       print('Failed to upload image. Status code: ${response.statusCode}');
-  //     }
-  //   } catch (error) {
-  //     // Handle errors
-  //     print('Error uploading image: $error');
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -246,60 +187,5 @@ class _UploadState extends State<UploadImagess> {
         ),
       ),
     );
-    //   body: Container(
-    //     // alignment: Alignment.center,
-    //     child: Column(
-    //       children: [
-    //         Container(
-    //           margin: EdgeInsets.only(top: 10, bottom: 10),
-    //           // alignment: Alignment.topCenter,
-    //           child: const Text(
-    //             'Select Image from :  ',
-    //             style: TextStyle(fontSize: 20),
-    //           ),
-    //         ),
-    //         Container(
-    //           // margin: EdgeInsets.all(40),
-    //           // alignment: Alignment.topCenter,
-    //           child: Row(
-    //             children: [
-    //               Container(
-    //                 // margin: EdgeInsets.only(right: 20),
-    //                 // alignment: Alignment.center,
-    //                 child: ElevatedButton(
-    //                   onPressed: () {},
-    //                   child: const Text('Camera'),
-    //                 ),
-    //               ),
-    //               Container(
-    //                 // alignment: Alignment.center,
-    //                 child: ElevatedButton(
-    //                   onPressed: () {},
-    //                   child: const Text('Gallery'),
-    //                 ),
-    //               ),
-    //             ],
-    //           ),
-    //         ),
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
-
-  // void getImage({required ImageSource source}) async {
-  //   // final file = await ImagePicker().pickImage(
-  //   //   source: source,
-  //   //   maxWidth: 640,
-  //   //   maxHeight: 480,
-  //   //   imageQuality: 70, //0 - 100
-  //   // );
-
-  //   if (file?.path != null) {
-  //     setState(() {
-  //       imageFile = File(file!.path);
-  //       Navigator.pushNamed(context, '/print');
-  //     });
-  //   }
-  // }
 }
